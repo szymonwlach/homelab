@@ -1,7 +1,12 @@
 # Homelab
 
+> An 11-year-old laptop, wiped and turned into a real Linux server.
+> Everything here was built, broken, and fixed by hand.
+
 Self-hosted Linux homelab running on a 2015 MacBook Air.
 Learning DevOps & platform engineering by building — not by watching tutorials.
+
+**Started:** July 2026
 
 ## Hardware
 
