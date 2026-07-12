@@ -1,0 +1,11 @@
+# Secrets — never commit these
+.env
+*.env
+!.env.example
+
+# Local overrides
+docker-compose.override.yml
+
+# OS junk
+.DS_Store
+Thumbs.db
