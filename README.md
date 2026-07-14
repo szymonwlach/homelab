@@ -18,13 +18,15 @@ Learning DevOps & platform engineering by building — not by watching tutorials
 
 - Ubuntu Server 24.04 LTS
 - Docker (Engine + Compose plugin)
-- nginx (first containerized service)
+- Prometheus + node-exporter + Grafana — monitoring stack, defined in docker-compose
+- Secrets kept in a local `.env`, excluded via `.gitignore`
 
 ## Roadmap
 
 - [x] Ubuntu Server install + SSH access
 - [x] Docker installed, first containers running
-- [ ] Grafana + Prometheus via docker-compose
+- [x] Prometheus + Grafana via docker-compose
+- [ ] Alerting rules (disk, memory, target down)
 - [ ] k3s (lightweight Kubernetes)
 - [ ] CI/CD with GitHub Actions
 - [ ] Security scanning in pipeline (tfsec, Trivy, gitleaks)
@@ -33,6 +35,12 @@ Learning DevOps & platform engineering by building — not by watching tutorials
 
 - [01 — Ubuntu Server setup](docs/01-ubuntu-setup.md)
 - [02 — WiFi troubleshooting: Broadcom BCM4360](docs/02-wifi-broadcom.md)
+- [03 — Monitoring stack: Prometheus + Grafana](docs/03-monitoring.md)
+
+## Notes
+
+Images are pinned to `:latest` for now — a known shortcut. Pinning to explicit
+versions is on the list.
 
 ## Why this exists
 
