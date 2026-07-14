@@ -33,9 +33,9 @@ Learning DevOps & platform engineering by building — not by watching tutorials
 
 ## Docs
 
-- [01 — Ubuntu Server setup](docs/01-ubuntu-setup.md)
-- [02 — WiFi troubleshooting: Broadcom BCM4360](docs/02-wifi-broadcom.md)
-- [03 — Monitoring stack: Prometheus + Grafana](docs/03-monitoring.md)
+- [01 - Ubuntu Server setup](docs/01-ubuntu-setup.md)
+- [02 - WiFi troubleshooting: Broadcom BCM4360](docs/02-wifi-broadcom.md)
+- [03 - Monitoring stack: Prometheus + Grafana](docs/03-monitoring.md)
 
 ## Notes
 
