@@ -1,4 +1,4 @@
-# 01 — Ubuntu Server setup on MacBook Air (2015)
+# 01 - Ubuntu Server setup on MacBook Air (2015)
 
 ## Goal
 

@@ -1,4 +1,4 @@
-# 02 — No network after install: Broadcom BCM4360
+# 02 - No network after install: Broadcom BCM4360
 
 ## Problem
 

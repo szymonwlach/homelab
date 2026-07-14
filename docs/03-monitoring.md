@@ -1,4 +1,4 @@
-# 03 — Monitoring stack: Prometheus + Grafana
+# 03 - Monitoring stack: Prometheus + Grafana
 
 ## What's running
 
