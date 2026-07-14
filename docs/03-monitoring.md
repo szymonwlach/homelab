@@ -110,3 +110,66 @@ nslookup node-exporter
 
 DNS resolved it perfectly. And Prometheus itself scrapes that exact hostname
 without complaint, visible as UP at `/targets`.
+
+Root cause: BusyBox's `wget` (the minimal one shipped in Alpine images) is
+unreliable at resolving container DNS. Nothing was broken except the tool I was
+testing with.
+
+**Lesson: when one tool says something is broken, confirm with a second tool
+before you start fixing.** I nearly spent an hour repairing DNS that worked.
+
+## Gotcha 2: YAML doesn't forgive
+
+```yaml
+- targets: ["localhost: 9090"] # broken, space after the colon
+- targets: ["localhost:9090"] # correct
+```
+
+The space makes it an invalid host:port string. Prometheus couldn't scrape
+itself, and the target showed DOWN. One character.
+
+## Secrets
+
+Grafana credentials come from environment variables, not from the compose file:
+
+```yaml
+environment:
+  - GF_SECURITY_ADMIN_USER=${GRAFANA_USER}
+  - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+```
+
+The actual values live in a local `.env`, which is in `.gitignore`.
+`.env.example` documents the required variables without exposing them.
+
+`.gitignore` only protects going forward. Anything committed once stays in git
+history, and deleting it in a later commit does not remove it. That's the whole
+reason pipelines run secret scanners like `gitleaks`.
+
+## Deploy loop
+
+The server never gets edited by hand:
+
+```bash
+# on the workstation
+git commit && git push
+
+# on the server
+git pull
+docker compose up -d          # or: docker compose restart prometheus
+```
+
+The repo is the source of truth. The server is just its reflection.
+
+## What I learned
+
+- **Prometheus is the memory.** Grafana is just a face. node-exporter only knows
+  the present moment.
+- **Pull beats push for failure detection.** Silence is unambiguous.
+- **Service names over IPs.** IPs are ephemeral, names are declared.
+- **Containers are disposable, data is not.** That's what volumes are for.
+- **Give each container exactly the access it needs.** node-exporter gets the
+  host filesystem, read-only. Grafana gets nothing.
+- **A failing tool can lie about a working system.** Verify with a second tool.
+
+_Debugged with AI in the loop; documented afterwards to make sure I understood it,
+not just pasted it._
