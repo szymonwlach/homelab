@@ -173,6 +173,14 @@ groups:
           severity: critical
         annotations:
           summary: "Disk usage above 90%"
+
+      - alert: RAMUsageCritical
+        expr: node_memory_MemAvailable_bytes < node_memory_MemTotal_bytes * 0.1
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "RAM usage above 90%"
 ```
 
 `up` is a metric Prometheus generates automatically for every scrape target:
@@ -181,8 +189,20 @@ without it, a one-second CPU spike or a single missed scrape would fire an
 alert. `for: 1m` means the condition has to hold continuously before it's
 treated as real. Different alerts warrant different `for` values: something
 that fails instantly and matters immediately (a target going down) gets a
-short one. Something that degrades slowly (disk filling up) can tolerate a
-longer one without losing any real warning time.
+short one. Something that degrades slowly (disk or memory filling up) can
+tolerate a longer one without losing any real warning time.
+
+The RAM alert deliberately uses `MemAvailable`, not a naive "total minus
+used" calculation. Linux uses spare memory for disk cache and buffers, which
+it hands back instantly the moment an application needs it. A calculation
+based on raw "used" memory would trigger false alarms on a perfectly healthy
+system just because the cache is doing its job. `MemAvailable` already
+accounts for that: it estimates what a new process could actually get,
+including reclaimable cache. Same comparison shape as the disk alert: the
+smaller value (`MemAvailable`) checked against a fraction of the larger one
+(`MemTotal`), not the other way around, since inverting them would compare
+the whole to a fraction of a subset and the condition would almost never be
+true.
 
 ## Gotcha 3: the rule file existed but Prometheus couldn't see it
 
@@ -235,6 +255,12 @@ git pull
 docker compose up -d          # or: docker compose restart prometheus
 ```
 
+Note the distinction: `restart` is enough when only the _contents_ of an
+already-mounted file changed (like adding the RAM alert to `alert_rules.yml`).
+`up -d` is needed when the compose file's _structure_ changed (new volumes,
+new ports, new services), since `restart` just relaunches the same container
+without re-reading what should be mounted into it.
+
 The repo is the source of truth. The server is just its reflection.
 
 ## What I learned
@@ -250,6 +276,9 @@ The repo is the source of truth. The server is just its reflection.
 - **Alerting is a query plus a threshold plus a duration.** Nothing more
   mystical than that. The duration (`for`) is what separates a real signal
   from noise.
+- **Percentages need the right base metric, not just any two numbers that
+  seem related.** `MemAvailable` vs `MemTotal` accounts for reclaimable cache;
+  the naive calculation doesn't.
 
 _Debugged with AI in the loop; documented afterwards to make sure I understood it,
 not just pasted it._
