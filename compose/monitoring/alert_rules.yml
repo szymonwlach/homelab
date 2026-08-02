@@ -1,0 +1,17 @@
+groups:
+  - name: node_alerts
+    rules:
+      - alert: TargetDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Target {{ $labels.instance }} is down"
+      - alert: DiskUsageCritical
+        expr: node_filesystem_avail_bytes < node_filesystem_size_bytes * 0.1
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Disk usage above 90%"
