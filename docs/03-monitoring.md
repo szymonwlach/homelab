@@ -145,6 +145,83 @@ The actual values live in a local `.env`, which is in `.gitignore`.
 history, and deleting it in a later commit does not remove it. That's the whole
 reason pipelines run secret scanners like `gitleaks`.
 
+## Adding alerting rules
+
+Dashboards are only useful if someone is staring at them. The actual point of
+Prometheus is that it can watch its own data and flag a problem before a human
+notices.
+
+An alert is the same kind of query used in the Query tab, evaluated on a
+schedule, with a threshold and a duration attached:
+
+```yaml
+groups:
+  - name: node_alerts
+    rules:
+      - alert: TargetDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Target {{ $labels.instance }} is down"
+
+      - alert: DiskUsageCritical
+        expr: node_filesystem_avail_bytes < node_filesystem_size_bytes * 0.1
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Disk usage above 90%"
+```
+
+`up` is a metric Prometheus generates automatically for every scrape target:
+1 if it answered, 0 if it didn't. `for` matters as much as the threshold itself:
+without it, a one-second CPU spike or a single missed scrape would fire an
+alert. `for: 1m` means the condition has to hold continuously before it's
+treated as real. Different alerts warrant different `for` values: something
+that fails instantly and matters immediately (a target going down) gets a
+short one. Something that degrades slowly (disk filling up) can tolerate a
+longer one without losing any real warning time.
+
+## Gotcha 3: the rule file existed but Prometheus couldn't see it
+
+Added `alert_rules.yml`, pointed to it from `prometheus.yml`:
+
+```yaml
+rule_files:
+  - "alert_rules.yml"
+```
+
+Reloaded Prometheus. Alerts page: "No rules found."
+
+The file existed on the host, correctly named, in the same folder as
+`prometheus.yml`. But `prometheus.yml` itself only gets into the container
+because of an explicit volume mount:
+
+```yaml
+volumes:
+  - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+```
+
+`alert_rules.yml` had no equivalent line. Referencing a file inside the
+container's config isn't the same as making that file exist inside the
+container. It needed its own mount:
+
+```yaml
+volumes:
+  - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  - ./alert_rules.yml:/etc/prometheus/alert_rules.yml:ro
+```
+
+Second, unrelated trip on the same change: the file was named
+`alert-rules.yml` on disk (hyphen) but referenced as `alert_rules.yml`
+(underscore) in both `prometheus.yml` and the new volume line. Two different
+filenames to the filesystem, close enough to look identical at a glance.
+Once the name matched everywhere, `docker compose up -d` (not `restart`,
+since the volume list itself had changed) picked it up and both rules showed
+up on `/alerts` as `Inactive`, the healthy resting state.
+
 ## Deploy loop
 
 The server never gets edited by hand:
@@ -170,6 +247,9 @@ The repo is the source of truth. The server is just its reflection.
 - **Give each container exactly the access it needs.** node-exporter gets the
   host filesystem, read-only. Grafana gets nothing.
 - **A failing tool can lie about a working system.** Verify with a second tool.
+- **Alerting is a query plus a threshold plus a duration.** Nothing more
+  mystical than that. The duration (`for`) is what separates a real signal
+  from noise.
 
 _Debugged with AI in the loop; documented afterwards to make sure I understood it,
 not just pasted it._

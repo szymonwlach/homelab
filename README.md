@@ -26,7 +26,7 @@ Learning DevOps & platform engineering by building — not by watching tutorials
 - [x] Ubuntu Server install + SSH access
 - [x] Docker installed, first containers running
 - [x] Prometheus + Grafana via docker-compose
-- [ ] Alerting rules (disk, memory, target down)
+- [x] Alerting rules (disk, memory, target down)
 - [ ] k3s (lightweight Kubernetes)
 - [ ] CI/CD with GitHub Actions
 - [ ] Security scanning in pipeline (tfsec, Trivy, gitleaks)
