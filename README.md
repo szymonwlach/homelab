@@ -37,6 +37,7 @@ Learning DevOps & platform engineering by building — not by watching tutorials
 - [02 - WiFi troubleshooting: Broadcom BCM4360](docs/02-wifi-broadcom.md)
 - [03 - Monitoring stack: Prometheus + Grafana](docs/03-monitoring.md)
 - [04 — Server hardening: lid switch and IP stability](docs/04-server-hardening.md)
+- [05 — Building a custom Docker image](docs/05-custom-dockerfile.md)
 
 ## Notes
 
