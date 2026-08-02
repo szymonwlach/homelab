@@ -34,7 +34,12 @@ services:
       - grafana-data:/var/lib/grafana
     depends_on:
       - prometheus
-
+  random-metrics:
+    build: ../random-metrics
+    container_name: random-metrics
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
 volumes:
   prometheus-data:
   grafana-data:
