@@ -15,3 +15,10 @@ groups:
           severity: critical
         annotations:
           summary: "Disk usage above 90%"
+      - alert: RAMUsageCritical
+        expr: node_memory_MemAvailable_bytes < node_memory_MemTotal_bytes * 0.1
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "RAM usage above 90%"
