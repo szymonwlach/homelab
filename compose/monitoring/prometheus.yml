@@ -10,6 +10,6 @@ scrape_configs:
       - targets: ["node-exporter:9100"]
   - job_name: "random-metric"
     static_configs:
-      - targets: ["random-metric:8000"]
+      - targets: ["random-metrics:8000"]
 rule_files:
   - "alert_rules.yml"
