@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: DeamonSet
+kind: DaemonSet
 metadata:
   name: node-exporter
   namespace: monitoring
