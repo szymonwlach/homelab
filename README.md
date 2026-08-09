@@ -27,7 +27,7 @@ Learning DevOps & platform engineering by building — not by watching tutorials
 - [x] Docker installed, first containers running
 - [x] Prometheus + Grafana via docker-compose
 - [x] Alerting rules (disk, memory, target down)
-- [ ] k3s (lightweight Kubernetes)
+- [x] k3s (lightweight Kubernetes)
 - [ ] CI/CD with GitHub Actions
 - [ ] Security scanning in pipeline (tfsec, Trivy, gitleaks)
 
@@ -38,6 +38,7 @@ Learning DevOps & platform engineering by building — not by watching tutorials
 - [03 - Monitoring stack: Prometheus + Grafana](docs/03-monitoring.md)
 - [04 — Server hardening: lid switch and IP stability](docs/04-server-hardening.md)
 - [05 — Building a custom Docker image](docs/05-custom-dockerfile.md)
+- [06 — Kubernetes with k3s](docs/06-k3s.md)
 
 ## Notes
 
