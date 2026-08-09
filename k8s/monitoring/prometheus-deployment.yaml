@@ -22,10 +22,10 @@ spec:
           ports:
             - containerPort: 9090
           volumeMounts:
-            - name:  Name of the Volume
-            mountPath:
-              - name: config
-                mountPath: /etc/prometheus
+            - name: Name of the Volume
+              mountPath:
+                - name: config
+                  mountPath: /etc/prometheus
       volumes:
         - name: config
           configMap:
