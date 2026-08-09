@@ -7,7 +7,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-    app: prometheus
+      app: prometheus
   template:
     metadata:
       labels:
