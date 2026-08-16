@@ -4,7 +4,7 @@ metadata:
   name: grafana
   namespace: monitoring
 spec:
-  replicas: { { .Values.grafana.replicas } }
+  replicas: {{ .Values.grafana.replicas }}
   selector:
     matchLabels:
       app: grafana
