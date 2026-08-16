@@ -1,0 +1,12 @@
+prometheus:
+  replicas: 1
+  image: prom/prometheus:latest
+
+grafana:
+  replicas: 1
+  image: grafana/grafana:latest
+  adminPassword: admin
+  storage: 1Gi
+
+nodeExporter:
+  image: prom/node-exporter:latest
