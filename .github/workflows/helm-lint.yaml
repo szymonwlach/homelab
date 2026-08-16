@@ -23,3 +23,11 @@ jobs:
 
       - name: Template Helm chart
         run: helm template monitoring k8s/charts/monitoring
+
+      - name: Scan images with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: prom/prometheus:latest
+          format: table
+          exit-code: 0
+          severity: CRITICAL,HIGH
