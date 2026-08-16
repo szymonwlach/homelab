@@ -20,3 +20,6 @@ jobs:
 
       - name: Lint Helm chat
         run: helm lint k8s/charts/monitoring
+
+      - name: Template Helm chart
+        run: helm template monitoring k8s/charts/monitoring
