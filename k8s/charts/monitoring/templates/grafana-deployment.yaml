@@ -4,7 +4,7 @@ metadata:
   name: grafana
   namespace: monitoring
 spec:
-  replicas: 1
+  replicas: { { .Values.grafana.replicas } }
   selector:
     matchLabels:
       app: grafana
@@ -15,12 +15,12 @@ spec:
     spec:
       containers:
         - name: grafana
-          image: grafana/grafana:latest
+          image: { { .Values.grafana.image } }
           ports:
             - containerPort: 3000
           env:
             - name: GF_SECURITY_ADMIN_PASSWORD
-              value: "admin"
+              value: { { .Values.grafana.adminPassword | quote } }
           volumeMounts:
             - name: grafana-storage
               mountPath: /var/lib/grafana
