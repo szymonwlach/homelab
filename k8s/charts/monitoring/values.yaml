@@ -3,10 +3,10 @@ prometheus:
   image: prom/prometheus:latest
 
 grafana:
-  replicas: 1
-  image: grafana/grafana:latest
-  adminPassword: admin
-  storage: 1Gi
+  replicas: { { .Values.grafana.replicas } }
+  image: { { .Values.grafana.image } }
+  adminPassword: { { .Values.grafana.adminPassword | quote } }
+  storage: { { .Values.grafana.storage } }
 
 nodeExporter:
   image: prom/node-exporter:latest
