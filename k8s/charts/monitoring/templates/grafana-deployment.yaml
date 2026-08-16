@@ -15,12 +15,12 @@ spec:
     spec:
       containers:
         - name: grafana
-          image: { { .Values.grafana.image } }
+          image: {{ .Values.grafana.image }}
           ports:
             - containerPort: 3000
           env:
             - name: GF_SECURITY_ADMIN_PASSWORD
-              value: { { .Values.grafana.adminPassword | quote } }
+              value: {{ .Values.grafana.adminPassword | quote }}
           volumeMounts:
             - name: grafana-storage
               mountPath: /var/lib/grafana
