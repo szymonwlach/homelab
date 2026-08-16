@@ -14,7 +14,7 @@ data:
             labels:
               severity: critical
             annotations:
-              summary: "Target {{ $labels.instance }} is down"
+              summary: "Target {{`{{ $labels.instance }}`}} is down"
           - alert: DiskUsageCritical
             expr: node_filesystem_avail_bytes < node_filesystem_size_bytes * 0.1
             for: 5m
