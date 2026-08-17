@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoUrl: https://github.com/szymonwlach/homelab
+    repoURL: https://github.com/szymonwlach/homelab
     targetRevision: main
     path: k8s/charts/monitoring
     helm:
@@ -21,4 +21,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      
