@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: node-exporter
-          image: prom/node-exporter:latest
+          image: {{ Values.nodeExporter.image }}
           ports:
             - containerPort: 9100
           volumeMounts:
