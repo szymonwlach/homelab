@@ -35,3 +35,4 @@ spec:
         - name: rules
           configMap:
             name: prometheus-rules
+#
