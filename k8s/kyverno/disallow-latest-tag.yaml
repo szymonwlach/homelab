@@ -1,7 +1,7 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: dissalow-latest-tag
+  name: disallow-latest-tag
 spec:
   validationFailureAction: Audit # if Enforce Kyverno blocks request, otherwise in 'Audit' it will go with raport Najlepiej na poczatku zobaczyc co lamie reguly czyli na Audit a potem na Enforce bo przy restarcie bo by sie posypalo.
   rules:
