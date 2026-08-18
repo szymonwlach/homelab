@@ -1,0 +1,19 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: dissalow-latest-tag
+spec:
+  validationFailureAction: Audit # if Enforce Kyverno blocks request, otherwise in 'Audit' it will go with raport Najlepiej na poczatku zobaczyc co lamie reguly czyli na Audit a potem na Enforce bo przy restarcie bo by sie posypalo.
+  rules:
+    - name: require-image-tag
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "Use the latest tag is prohibited. Use specific image version"
+        pattern:
+          spec:
+            containers:
+              - image: "!*:latest"
