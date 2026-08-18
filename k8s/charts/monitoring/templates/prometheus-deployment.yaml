@@ -16,7 +16,7 @@ spec:
       serviceAccountName: prometheus
       containers:
         - name: prometheus
-          image: prom/prometheus:latest
+          image: {{ Values.prometheus.image }}
           args:
             - "--config.file=/etc/prometheus/prometheus.yml"
           ports:
