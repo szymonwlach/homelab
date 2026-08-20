@@ -122,6 +122,10 @@ k3s cluster
 - [04 - Server hardening: lid switch and IP stability](docs/04-server-hardening.md)
 - [05 - Building a custom Docker image](docs/05-custom-dockerfile.md)
 - [06 - Kubernetes with k3s](docs/06-k3s.md)
+- [07 - Helm](docs/07-helm.md)
+- [08 - GitHub Actions](docs/08-github-actions.md)
+- [09 - ArgoCD](docs/09-argocd.md)
+- [10 - Kyverno](docs/10-kyverno.md)
 
 ## Why this exists
 
