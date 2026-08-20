@@ -1,4 +1,4 @@
-# 08 — GitHub Actions
+# 08 - GitHub Actions
 
 ## Problem
 

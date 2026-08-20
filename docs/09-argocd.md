@@ -1,4 +1,4 @@
-# 09 — ArgoCD
+# 09 - ArgoCD
 
 ## Problem
 

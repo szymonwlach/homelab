@@ -1,4 +1,4 @@
-# 04 — Server hardening: lid switch and IP stability
+# 04 - Server hardening: lid switch and IP stability
 
 ## Problem 1: closing the lid killed the SSH session
 

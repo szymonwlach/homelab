@@ -1,4 +1,4 @@
-# 05 — Building a custom Docker image
+# 05 - Building a custom Docker image
 
 ## Goal
 
