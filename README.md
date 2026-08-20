@@ -84,20 +84,21 @@ Learning DevOps & platform engineering by building — not by watching tutorials
 
 ## Architecture
 
+```
 GitHub repo
-↓
+    ↓
 GitHub Actions (helm lint + template + Trivy scan)
-↓
+    ↓
 ArgoCD (GitOps — auto-sync on push)
-↓
+    ↓
 k3s cluster
-├── monitoring namespace
-│ ├── Prometheus (Service Discovery via k8s API)
-│ ├── Grafana (PersistentVolume for dashboards)
-│ └── node-exporter (DaemonSet — one per node)
-├── argocd namespace
-└── kyverno namespace (policy enforcement)
-
+    ├── monitoring namespace
+    │   ├── Prometheus (Service Discovery via k8s API)
+    │   ├── Grafana (PersistentVolume for dashboards)
+    │   └── node-exporter (DaemonSet — one per node)
+    ├── argocd namespace
+    └── kyverno namespace (policy enforcement)
+```
 
 ## Roadmap
 
