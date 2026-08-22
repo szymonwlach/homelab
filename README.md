@@ -127,6 +127,7 @@ k3s cluster
 - [08 - GitHub Actions](docs/08-github-actions.md)
 - [09 - ArgoCD](docs/09-argocd.md)
 - [10 - Kyverno](docs/10-kyverno.md)
+- [10 - Sealed Secrets](docs/11-selead-secrets.md)
 
 ## Why this exists
 
