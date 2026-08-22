@@ -1,6 +1,6 @@
 prometheus:
   replicas: 1
-  image: prom/prometheus:v99.99.99
+  image: prom/prometheus:v3.3.1
 
 grafana:
   replicas: 1
