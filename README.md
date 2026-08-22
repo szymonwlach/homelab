@@ -112,7 +112,7 @@ k3s cluster
 - [x] GitHub Actions CI pipeline (lint, template validation, Trivy)
 - [x] ArgoCD GitOps — push to repo = automatic cluster sync
 - [x] Kyverno policy enforcement (disallow :latest tag)
-- [ ] Sealed Secrets
+- [x] Sealed Secrets
 - [ ] Terraform
 
 ## Docs
