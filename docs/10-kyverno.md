@@ -1,4 +1,4 @@
-# 10 — Kyverno
+# 10 - Kyverno
 
 ## Problem
 
