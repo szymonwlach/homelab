@@ -32,8 +32,8 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
     volumes:
       - grafana-data:/var/lib/grafana
-    depends_on:
-      - prometheus
+    # depends_on:
+    #   - prometheus
   random-metrics:
     build: ../random-metrics
     container_name: random-metrics
